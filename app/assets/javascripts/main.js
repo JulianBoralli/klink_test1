@@ -4,6 +4,7 @@ $( document ).on('turbolinks:load', function() {
 // create a wrapper around native canvas element (with id="c")
 var canvas = new fabric.Canvas('c');
 
+
 // create a rectangle object
 var rectA = new fabric.Rect({
   letter: "A",
@@ -24,8 +25,14 @@ var rectB = new fabric.Rect({
   height: 20
 });
 
+var image = fabric.Image.fromURL('images/A.png', function(oImg) {
+  canvas.add(oImg);
+});
+
+
+
 // "add" rectangle onto canvas
-canvas.add(rectA, rectB);
+canvas.add(rectA, rectB, image);
 
 
 rectA.on('selected', function() {
