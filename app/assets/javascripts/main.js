@@ -80,12 +80,13 @@ function newAjax(event) {
 	})
 	.done(function(response) {
 		console.log(response)
-		
+		$('#coordinates').empty();
+		$('#coordinates').append(response);
 		
 	})
 	.fail(function(error) {
 		console.log(error);
-		// alert(error.status);
+		alert(error.status);
 	});
 
 };

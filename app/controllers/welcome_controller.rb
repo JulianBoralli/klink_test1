@@ -9,9 +9,14 @@ class WelcomeController < ApplicationController
 
 		p "GOT IT!!!"
 		letters = JSON.parse(params["array"])
-		p letters[0]["letter"]
+		word = ""
+		letters.each do |letter|
+			word << letter["letter"] + " " + letter["left"].to_s 
+ 		end
+
 		p "*"*60
-		render json: "Response! KATHY!"
+		p word
+		render json: word.to_json
 	end
 
 end
