@@ -8,9 +8,10 @@ class WelcomeController < ApplicationController
 
 
 		p "GOT IT!!!"
-		p params["letter"]
+		letters = JSON.parse(params["array"])
+		p letters[0]["letter"]
 		p "*"*60
-		render json: "Response!"
+		render json: "Response! KATHY!"
 	end
 
 end

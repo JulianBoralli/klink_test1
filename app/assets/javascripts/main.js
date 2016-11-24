@@ -6,7 +6,6 @@ $( document ).on('turbolinks:load', function() {
 
 	// create a rectangle object
 	var rectA = new fabric.Rect({
-	  data: "A",
 	  left: 100,
 	  top: 100,
 	  fill: 'red',
@@ -14,16 +13,27 @@ $( document ).on('turbolinks:load', function() {
 	  height: 20
 	});
 
+rectA.toObject = function () {
+	return {
+		letter: "A",
+		left: this.left
+	};
+};
 	// create a rectangle object
 	var rectB = new fabric.Rect({
-	  data: "B",
 	  left: 200,
 	  top: 200,
-	  fill: 'red',
+	  fill: 'green',
 	  width: 20,
 	  height: 20
 	});
 
+	rectB.toObject = function () {
+	return {
+		letter: "B",
+		left: this.left
+	};
+};
 	// "add" rectangle onto canvas
 	canvas.add(rectA, rectB);
 
@@ -35,12 +45,13 @@ $( document ).on('turbolinks:load', function() {
 	// 	// console.log(options.letter);
 	// });
 
+	// var runAjax = function () { newAjax(canvas)};
 
 
 
 	rectA.on('selected', newAjax);
 
-});
+
 
 
 
@@ -50,14 +61,16 @@ $( document ).on('turbolinks:load', function() {
 function newAjax(event) {
 	
 	
-	console.log(this);
-	console.log(event);
+	// console.log(this);
+	// console.log(event);
 
-	var letter = $(this);
+	var letters = canvas._objects;
+
 	var action = "/welcome/show";
 	var method = "GET";
-	// var data = JSON.stringify({letter: letter[0].data})
-	var data = {letter: letter[0].data}
+	
+ 	var banana = JSON.stringify(letters);
+	var data = {array: banana};
 	console.log(data);
 	$.ajax({
 		url: action,
@@ -72,7 +85,10 @@ function newAjax(event) {
 	})
 	.fail(function(error) {
 		console.log(error);
-		alert(error.status);
+		// alert(error.status);
 	});
 
 };
+
+
+});
